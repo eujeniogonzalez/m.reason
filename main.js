@@ -1,11 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
+const { app, BrowserWindow } = require('electron');
 const Store = require('./store.js');
 
 const store = new Store({
     configName: 'user-preferences',
     defaults: {
-      windowBounds: { width: 100, height: 50 }
+      // todo Вынести в константы
+      windowBounds: { width: 300, height: 300 }
     }
 });
 
@@ -21,17 +21,11 @@ function createWindow() {
         }
     });
 
+    mainWindow.setMenu(null);
+
     mainWindow.webContents.openDevTools();
 
-    mainWindow.loadFile('main-page.html');
-
-    ipcMain.on('go-to-tasks-page', () => {
-        mainWindow.loadFile('tasks-page.html');
-    });
-
-    ipcMain.on('go-to-main-page', () => {
-        mainWindow.loadFile('main-page.html');
-    });
+    mainWindow.loadFile('./src/app.html');
 
     mainWindow.on('resize', () => {
         let { width, height } = mainWindow.getBounds();

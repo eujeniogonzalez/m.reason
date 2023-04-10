@@ -1,8 +1,10 @@
 @font-face {
   font-family: 'Montserrat Regular';
-  src: url('./../fonts/Montserrat-Regular.ttf') format('truetype');
+  src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-/* todo Удалить все комментарии */
+
 :root {
   --left-column-width: 300px;
   --header-height: 100px;
@@ -20,12 +22,10 @@
 
 header {
   height: var(--header-height);
-  /* background-color: aqua; */
   display: flex;
 }
 
 .logo {
-  /* background-color: brown; */
   width: var(--left-column-width);
   display: flex;
   justify-content: center;
@@ -36,7 +36,6 @@ header {
 }
 
 .title {
-  /* background-color: salmon; */
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -51,7 +50,6 @@ main {
 }
 
 .navigation {
-  /* background-color: sandybrown; */
   width: var(--left-column-width);
   flex-grow: 0;
   flex-shrink: 0;
