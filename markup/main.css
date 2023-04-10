@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'Montserrat Regular';
+  src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* todo Удалить все комментарии */
+:root {
+  --left-column-width: 300px;
+  --header-height: 100px;
+  --content-background-color: #e6e6e6;
+  --nav-item-background-color: rgb(219, 214, 250);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat Regular';
+  color: #333333;
+}
+
+header {
+  height: var(--header-height);
+  /* background-color: aqua; */
+  display: flex;
+}
+
+.logo {
+  /* background-color: brown; */
+  width: var(--left-column-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 30px;
+}
+
+.title {
+  /* background-color: salmon; */
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-size: 20px;
+  padding-left: 40px;
+}
+
+main {
+  display: flex;
+  height: calc(100vh - var(--header-height));
+}
+
+.navigation {
+  /* background-color: sandybrown; */
+  width: var(--left-column-width);
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 40px 20px 0 20px;
+}
+
+.nav-item {
+  display: flex;
+  margin: 5px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.nav-item-active {
+  background-color: var(--nav-item-background-color);
+}
+
+.content {
+  background-color: var(--content-background-color);
+  margin: 20px 50px 50px 20px;
+  border-radius: 30px;
+  padding: 30px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
