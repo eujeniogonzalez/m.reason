@@ -11,10 +11,10 @@ class Store {
 
   constructor(opts) {
     const userDataPath = (electron.app || electron.remote.app).getPath('userData');
-    const jsondatabasePath = path.join(userDataPath, 'JSON Database');
+    const jsonDatabasePath = path.join(userDataPath, 'JSON Database');
 
     // todo Вынести в отдельную функцию
-    if (!jsondatabasePath) {
+    if (!jsonDatabasePath) {
       fs.mkdir(jsondatabasePath, (err) => {
         if (err) {
             return console.error(err);
