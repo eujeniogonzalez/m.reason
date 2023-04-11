@@ -20,7 +20,7 @@ class Store {
     }
 
     this.#path = path.join(userDataPath, opts.configName + '.json');
-    this.#data = parseDataFile(this.path, opts.defaults);
+    this.#data = parseDataFile(this.#path, opts.defaults);
   }
   
   get(key) {
@@ -35,9 +35,12 @@ class Store {
 }
 
 function parseDataFile(filePath, defaults) {
+  // console.log(JSON.parse(fs.readFileSync(filePath)));
   try {
+    // console.log('uspeh');
     return JSON.parse(fs.readFileSync(filePath));
   } catch(error) {
+    // console.log('lol');
     return defaults;
   }
 }
