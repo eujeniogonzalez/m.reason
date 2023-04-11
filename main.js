@@ -24,7 +24,7 @@ function createWindow() {
     }
   });
 
-  mainWindow.setMenu(null);
+  // mainWindow.setMenu(null);
 
   mainWindow.webContents.openDevTools();
 
