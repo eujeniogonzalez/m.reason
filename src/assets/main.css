@@ -23,6 +23,7 @@
 header {
   height: var(--header-height);
   display: flex;
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0.9), rgba(196, 196, 196, 0) 50%);
 }
 
 .logo {
