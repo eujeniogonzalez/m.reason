@@ -1,21 +1,18 @@
 const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
-
-// todo Вынести системные пути в конастанты
-
+const { FOLDERS } = require('./const.js');
 
 class Store {
   #path = null;
   #data = null;
 
   constructor(opts) {
-    const userDataPath = (electron.app || electron.remote.app).getPath('userData');
-    const jsonDatabasePath = path.join(userDataPath, 'JSON Database');
+    const userDataPath = (electron.app || electron.remote.app).getPath(FOLDERS.USER_DATA);
+    const jsonDatabasePath = path.join(userDataPath, FOLDERS.DATABASE);
 
-    // todo Вынести в отдельную функцию
     if (!jsonDatabasePath) {
-      fs.mkdir(jsondatabasePath, (err) => {
+      fs.mkdir(jsonDatabasePath, (err) => {
         if (err) {
             return console.error(err);
         }
