@@ -1,9 +1,9 @@
 const { app, BrowserWindow } = require('electron');
-const { DEFAULT_WINDOW_SIZE } = require('./const.js')
+const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS } = require('./const.js')
 const Store = require('./store.js');
 
 const store = new Store({
-  configName: 'user-preferences',
+  configName: FILES.PREFERENCES,
   defaults: {
     windowBounds: {
       width: DEFAULT_WINDOW_SIZE.WIDTH,
@@ -13,7 +13,7 @@ const store = new Store({
 });
 
 function createWindow() {
-  let { width, height } = store.get('windowBounds');
+  let { width, height } = store.get(OPTIONS.WINDOW_BOUNDS);
     
   const mainWindow = new BrowserWindow({
     width,
@@ -32,7 +32,7 @@ function createWindow() {
 
   mainWindow.on('resize', () => {
     let { width, height } = mainWindow.getBounds();
-    store.set('windowBounds', { width, height });
+    store.set(OPTIONS.WINDOW_BOUNDS, { width, height });
   });
 }
 

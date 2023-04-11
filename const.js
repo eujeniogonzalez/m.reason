@@ -8,6 +8,14 @@ const FOLDERS = {
   DATABASE: 'JSON Database'
 };
 
-module.exports = { DEFAULT_WINDOW_SIZE, FOLDERS };
+const FILES = {
+  PREFERENCES: 'user-preferences'
+};
+
+const OPTIONS = {
+  WINDOW_BOUNDS: 'windowBounds'
+};
+
+module.exports = { DEFAULT_WINDOW_SIZE, FOLDERS, FILES, OPTIONS };
 
 
