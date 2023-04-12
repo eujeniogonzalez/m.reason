@@ -39,9 +39,17 @@ const ROUTES = {
   COLLECTIONS: {
     HASH: '#collections',
     NAME: 'Коллекции'
+  },
+  TASKS: {
+    HASH: '#tasks',
+    NAME: 'Задачи'
   }
 };
 
-module.exports = { DEFAULT_WINDOW_SIZE, FOLDERS, FILES, OPTIONS, RENDER_POSITION, ROUTES };
+const ACTIONS = {
+  CHANGE_ROUTE: 'changeRoute'
+};
+
+module.exports = { DEFAULT_WINDOW_SIZE, FOLDERS, FILES, OPTIONS, RENDER_POSITION, ROUTES, ACTIONS };
 
 

@@ -1,9 +1,5 @@
-const { createElement, changeActiveElement } = require('../utils.js');
+const { createElement, changeActiveElement, isElementActive } = require('../utils.js');
 const { ROUTES } = require('../const.js');
-
-function isElementActive(element, className) {
-  return element.classList.contains(className);
-}
 
 function createNavigationTemplate() {
   return `
@@ -12,6 +8,7 @@ function createNavigationTemplate() {
       <a href="${ROUTES.SHIPMENT.HASH}" class="nav-item">${ROUTES.SHIPMENT.NAME}</a>
       <a href="${ROUTES.CONVERTER.HASH}" class="nav-item">${ROUTES.CONVERTER.NAME}</a>
       <a href="${ROUTES.COLLECTIONS.HASH}" class="nav-item">${ROUTES.COLLECTIONS.NAME}</a>
+      <a href="${ROUTES.TASKS.HASH}" class="nav-item">${ROUTES.TASKS.NAME}</a>
     </div>
   `;
 }

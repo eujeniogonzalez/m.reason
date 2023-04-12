@@ -19,4 +19,8 @@ function changeActiveElement(parent, element, className) {
   element.classList.add(className);
 }
 
-module.exports = { createElement, render, changeActiveElement };
+function isElementActive(element, className) {
+  return element.classList.contains(className);
+}
+
+module.exports = { createElement, render, changeActiveElement, isElementActive };

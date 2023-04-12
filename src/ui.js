@@ -1,3 +1,4 @@
+const headerElement = document.querySelector('header');
 const mainElement = document.querySelector('main');
 
-module.exports = { mainElement };
+module.exports = { headerElement, mainElement };

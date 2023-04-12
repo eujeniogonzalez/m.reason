@@ -4,10 +4,12 @@ const { render } = require('../utils.js');
 
 class NavigationPresenter {
   #mainElement = null;
+  #navigationModel = null;
   #navigationView = null;
 
-  constructor() {
+  constructor({ navigationModel }) {
     this.#mainElement = mainElement;
+    this.#navigationModel = navigationModel;
     this.#navigationView = new NavigationView({ onNavigationClick: this.#onNavigationClick });
   }
 
@@ -16,7 +18,7 @@ class NavigationPresenter {
   }
 
   #onNavigationClick = ({ hash }) => {
-    console.log(hash);
+    this.#navigationModel.hash = hash;
   };
 }
 
