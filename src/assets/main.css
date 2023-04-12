@@ -20,6 +20,26 @@
   color: #333333;
 }
 
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-button {
+  background: #888;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: salmon;
+}
+
 a {
   text-decoration: none;
 }
@@ -73,11 +93,48 @@ main {
   cursor: default;
 }
 
-.content {
+.content-wrapper {
   background-color: var(--content-background-color);
   margin: 20px 50px 50px 20px;
   border-radius: 30px;
-  padding: 30px;
+  padding: 20px 12px;
   flex-grow: 1;
   flex-shrink: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+.content {
+  padding: 0 8px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  border-radius: 25px;
+  overflow-y: scroll;
+}
+
+.collections {
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.collection {
+  background-color: #ffffff;
+  padding: 30px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.collection:hover {
+  color: salmon;
+}
+
+.add-collection img {
+  width: 32px;
+  height: 32px;
 }
