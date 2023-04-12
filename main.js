@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS } = require('./const.js')
+const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS } = require('./src/const.js');
 const Store = require('./store.js');
 
 const store = new Store({

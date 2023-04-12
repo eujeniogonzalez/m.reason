@@ -1,7 +1,7 @@
 const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { FOLDERS } = require('./const.js');
+const { FOLDERS } = require('./src/const.js');
 
 class Store {
   #path = null;

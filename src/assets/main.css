@@ -70,6 +70,7 @@ main {
 
 .nav-item-active {
   background-color: var(--nav-item-background-color);
+  cursor: default;
 }
 
 .content {

@@ -25,19 +25,19 @@ const RENDER_POSITION = {
 
 const ROUTES = {
   DASHBOARD: {
-    HASH: 'dashboard',
+    HASH: '#dashboard',
     NAME: 'Дашборд'
   },
   SHIPMENT: {
-    HASH: 'shipment',
+    HASH: '#shipment',
     NAME: 'Поставки'
   },
   CONVERTER: {
-    HASH: 'converter',
+    HASH: '#converter',
     NAME: 'Конвертер'
   },
   COLLECTIONS: {
-    HASH: 'collections',
+    HASH: '#collections',
     NAME: 'Коллекции'
   }
 };

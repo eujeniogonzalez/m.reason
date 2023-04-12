@@ -8,12 +8,16 @@ class NavigationPresenter {
 
   constructor() {
     this.#mainElement = mainElement;
-    this.#navigationView = new NavigationView;
+    this.#navigationView = new NavigationView({ onNavigationClick: this.#onNavigationClick });
   }
 
   init() {
     render(this.#navigationView.element, this.#mainElement);
   }
+
+  #onNavigationClick = ({ hash }) => {
+    console.log(hash);
+  };
 }
 
 module.exports = { NavigationPresenter };
