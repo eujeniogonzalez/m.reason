@@ -10,7 +10,7 @@ class NavigationPresenter {
   constructor({ navigationModel }) {
     this.#mainElement = mainElement;
     this.#navigationModel = navigationModel;
-    this.#navigationView = new NavigationView({ onNavigationClick: this.#onNavigationClick });
+    this.#navigationView = new NavigationView({ onNavigationClick: this.#onNavigationClick, navigationModel });
   }
 
   init() {

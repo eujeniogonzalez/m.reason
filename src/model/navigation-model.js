@@ -2,7 +2,7 @@ const { Observable } = require('../observable.js');
 const { ROUTES, ACTIONS } = require('../const.js');
 
 class NavigationModel extends Observable {
-  #currentHash = ROUTES.DASHBOARD.HASH;
+  #currentHash = ROUTES.TASKS.HASH;
 
   get hash() {
     return this.#currentHash;

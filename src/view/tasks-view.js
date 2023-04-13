@@ -26,7 +26,7 @@ function createTasksTemplate() {
         <label class="tasks-filter-is-done">
           <input type="checkbox" class="tasks-filter-is-done-input">
           <div class="tasks-filter-is-done-switcher"></div>
-          <div class="tasks-filter-is-done-title">Скрыть выполненные задачи</div>
+          <div class="tasks-filter-is-done-title">Скрыть выполненные</div>
         </label>
       </div>
     </div>
