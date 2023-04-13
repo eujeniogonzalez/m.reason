@@ -10,6 +10,10 @@
   --header-height: 100px;
   --content-background-color: #e6e6e6;
   --nav-item-background-color: rgb(219, 214, 250);
+  --brand_color: rgb(154, 140, 247);
+  --border-radius-outer: 20px;
+  --border-radius-inner: 15px;
+  --border-radius-button: 10px;
 }
 
 * {
@@ -18,6 +22,7 @@
   box-sizing: border-box;
   font-family: 'Montserrat Regular';
   color: #333333;
+  outline: none;
 }
 
 ::-webkit-scrollbar {
@@ -49,6 +54,33 @@ header {
   display: flex;
   background: linear-gradient(180deg, rgba(245, 245, 245, 0.9), rgba(196, 196, 196, 0) 50%);
 }
+
+/* Universal styles for forms (start) */
+.form {
+	padding: 0px 0px;
+}
+.input_text {
+	box-sizing: border-box;
+	border-radius: var(--border-radius-button);
+	border: 2px solid #999999;
+	padding: 12px;
+	color: #666666;
+	font-size: 16px;
+  width: 500px;
+}
+
+.input_submit {
+	box-sizing: border-box;
+	border-radius: var(--border-radius-button);
+	border: none;
+	padding: 14px 30px;
+	background-color: var(--brand_color);
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 16px;
+  white-space: nowrap;
+}
+/* Universal styles for forms (end) */
 
 .logo {
   width: var(--left-column-width);
@@ -85,7 +117,7 @@ main {
   display: flex;
   margin: 5px;
   padding: 10px 40px;
-  border-radius: 10px;
+  border-radius: var(--border-radius-button);
 }
 
 .nav-item-active {
@@ -96,7 +128,7 @@ main {
 .content-wrapper {
   background-color: var(--content-background-color);
   margin: 20px 50px 50px 20px;
-  border-radius: 30px;
+  border-radius: var(--border-radius-outer);
   padding: 20px 12px;
   flex-grow: 1;
   flex-shrink: 1;
@@ -108,12 +140,12 @@ main {
   padding: 0 8px;
   flex-grow: 1;
   flex-shrink: 1;
-  border-radius: 25px;
+  border-radius: var(--border-radius-inner);
   overflow-y: scroll;
 }
 
 .collections {
-  border-radius: 25px;
+  border-radius: var(--border-radius-inner);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
@@ -138,3 +170,95 @@ main {
   width: 32px;
   height: 32px;
 }
+
+.tasks-control {
+  background-color: #ffffff;
+  border-radius: var(--border-radius-inner);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks-filter {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Custom checkbox (start) */
+.tasks-filter-is-done {
+  --width: 40px;
+  --height: 20px;
+  --first-color: rgb(160, 160, 160);
+  --second-color: rgb(201, 201, 201);
+  --third-color: var(--brand_color);
+  --offset: 2px;
+  --duration: 0.5s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.tasks-filter-is-done:hover {
+  filter: brightness(1.1);
+}
+
+.tasks-filter-is-done-title {
+  margin-left: 10px;
+}
+
+.tasks-filter-is-done-switcher {
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--width);
+  background-color: var(--second-color);
+  transition: var(--duration);
+}
+
+.tasks-filter-is-done-input {
+  display: none;
+}
+
+.tasks-filter-is-done-input:checked ~ .tasks-filter-is-done-switcher {
+  background-color: var(--third-color);
+}
+
+.tasks-filter-is-done-input:checked ~ .tasks-filter-is-done-switcher::before {
+  background-color: #ffffff;
+  left: calc(var(--width) - var(--height) + var(--offset));
+}
+
+.tasks-filter-is-done-switcher::before {
+  content: '';
+  position: absolute;
+  top: var(--offset);
+  left: var(--offset);
+  width: calc(var(--height) - 2 * var(--offset));
+  height: calc(var(--height) - 2 * var(--offset));
+  background-color: var(--first-color);
+  border-radius: 50%;
+  transition: var(--duration);
+}
+/* Custom checkbox (end) */
+
+.new-task-form-container {
+  display: flex;
+  align-items: center;
+}
+
+.new-task-form {
+  display: flex;
+  align-items: center;
+}
+
+.new-task-text {
+  height: 50px;
+}
+
+.new-task-submit {
+  height: 50px;
+  margin-left: 5px;
+  position: relative;
+}
+

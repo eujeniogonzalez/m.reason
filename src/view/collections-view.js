@@ -1,6 +1,6 @@
 const { createElement } = require('../utils.js');
 
-function createCollectionsListTemplate() {
+function createCollectionsTemplate() {
   return `
     <div class="collections">
       <div class="collection add-collection">
@@ -15,20 +15,16 @@ function createCollectionsListTemplate() {
   `;
 }
 
-class CollectionsListView {
+class CollectionsView {
   #element = null;
-
-  constructor({ onNavigationClick }) {
-    this.#onNavigationClick = onNavigationClick;
-  }
 
   get element() {
     if (!this.#element) {
-      this.#element = createElement(createCollectionsListTemplate());
+      this.#element = createElement(createCollectionsTemplate());
     }
 
     return this.#element;
   }
 }
 
-module.exports = { CollectionsListView };
+module.exports = { CollectionsView };
