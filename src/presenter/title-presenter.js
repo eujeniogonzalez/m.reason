@@ -16,9 +16,9 @@ class TitlePresenter {
     this.#navigationModel.addObserver(this.#changetitle);
   }
 
-  init() {
+  init = () => {
     render(this.#titleView.element, this.#headerElement, RENDER_POSITION.BEFOREEND);
-  }
+  };
 
   #getTitle = (hash) => {
     const route = Object.keys(ROUTES).find((route) => ROUTES[route].HASH === hash);

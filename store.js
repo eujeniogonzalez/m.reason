@@ -3,6 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const { FOLDERS } = require('./src/const.js');
 
+// todo Сделать Store универсальным
+// Сделать методы для добавления и удаления данных
+// Сделать методы для проверки данных на соответствие структуры (интерфейсы)
 class Store {
   #path = null;
   #data = null;

@@ -13,9 +13,9 @@ class NavigationPresenter {
     this.#navigationView = new NavigationView({ onNavigationClick: this.#onNavigationClick, navigationModel });
   }
 
-  init() {
+  init = () => {
     render(this.#navigationView.element, this.#mainElement);
-  }
+  };
 
   #onNavigationClick = ({ hash }) => {
     this.#navigationModel.hash = hash;

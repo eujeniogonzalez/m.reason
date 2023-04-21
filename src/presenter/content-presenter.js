@@ -14,10 +14,10 @@ class ContentPresenter {
   #converterPresenter = null;
   #collectionsPresenter = null;
 
-  constructor({ navigationModel }) {
+  constructor({ navigationModel, tasksModel }) {
     this.#currentRoute = navigationModel.hash;
 
-    this.#tasksPresenter = new TasksPresenter();
+    this.#tasksPresenter = new TasksPresenter({ tasksModel });
     this.#shipmentsPresenter = new ShipmentsPresenter();
     this.#dashboardPresenter = new DashboardPresenter();
     this.#converterPresenter = new ConverterPresenter();
