@@ -15,4 +15,8 @@ function isElementActive(element, className) {
   return element.classList.contains(className);
 }
 
-module.exports = { createElement, render, isElementActive };
+function isLengthCorrect(string, min, max) {
+  return (string.length > min && string.length <= max);
+}
+
+module.exports = { createElement, render, isElementActive, isLengthCorrect };

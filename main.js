@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require('electron');
-const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS } = require('./src/const.js');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS, CHANNELS } = require('./src/const.js');
 const Store = require('./store.js');
 
 const store = new Store({
@@ -34,6 +34,11 @@ function createWindow() {
     let { width, height } = mainWindow.getBounds();
     store.set(OPTIONS.WINDOW_BOUNDS, { width, height });
   });
+
+  ipcMain.on(CHANNELS.CREATE_TASK, (event, data) => event.returnValue = store.createTask(data));
+  ipcMain.on(CHANNELS.GET_TASK_LIST, (event) => event.returnValue = store.getTaskList());
+  ipcMain.on(CHANNELS.DELETE_TASK, (event, taskId) => event.returnValue = store.deleteTask(taskId));
+  ipcMain.on(CHANNELS.CHANGE_TASK_ACTIVITY, (event, taskId) => event.returnValue = store.changeTaskActivity(taskId));
 }
 
 app.whenReady().then(createWindow);
@@ -49,4 +54,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-

@@ -14,6 +14,7 @@
   --border-radius-outer: 20px;
   --border-radius-inner: 15px;
   --border-radius-button: 10px;
+  --danger-color: salmon;
 }
 
 * {
@@ -49,6 +50,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: var(--brand_color);
+}
+
 header {
   height: var(--header-height);
   display: flex;
@@ -79,6 +84,10 @@ header {
 	cursor: pointer;
 	font-size: 14px;
   white-space: nowrap;
+}
+
+.wrong_input {
+  border-color: var(--danger-color);
 }
 /* Universal styles for forms (end) */
 
@@ -124,6 +133,7 @@ main {
 .nav-item-active {
   background-color: var(--nav-item-background-color);
   cursor: default;
+  pointer-events: none;
 }
 
 .content-wrapper {
@@ -264,3 +274,68 @@ main {
   position: relative;
 }
 
+.task-list {
+  margin-top: 20px;
+}
+
+.task-list-empty {
+  padding: 20px;
+  text-align: center;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.task-item + .task-item {
+  margin-top: 5px;
+}
+
+.task-item-date {
+  width: 100px;
+  font-size: 12px;
+  color: #666666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.task-item-text {
+  display: flex;
+  flex-grow: 1;
+  font-size: 18px;
+}
+
+.closed-task {
+  color: #cccccc;
+  text-decoration: line-through;
+}
+
+.task-item-close-open {
+  width: 120px;
+  font-size: 12px;
+  color: #666666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.task-item-delete {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.task-item-delete-link {
+  font-size: 12px;
+  color: #666666;
+}

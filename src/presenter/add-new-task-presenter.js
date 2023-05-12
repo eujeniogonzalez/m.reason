@@ -20,8 +20,8 @@ class AddNewTaskPresenter {
     this.#addNewTaskView.focuseOnInput();
   };
 
-  #createNewTask = () => {
-    this.#tasksModel.createTask('task#1');
+  #createNewTask = (newTaskText) => {
+    this.#tasksModel.createTask(newTaskText);
   };
 }
 

@@ -1,4 +1,5 @@
-const { createElement } = require('../utils.js');
+const { createElement, isLengthCorrect } = require('../utils.js');
+const { TASK_LENGTH, CLASSES, SYMBOLS } = require('../const.js');
 
 function createAddNewTaskTemplate() {
   return `
@@ -33,6 +34,7 @@ class AddNewTaskView {
     this.#createNewTask = createNewTask;
 
     this.#newTaskSubmit.addEventListener('click', this.#newTaskSubmitClickHandler);
+    this.#newTaskInput.addEventListener('input', this.#resetWrongInputClassHandler);
   }
 
   get element() {
@@ -50,9 +52,24 @@ class AddNewTaskView {
   #newTaskSubmitClickHandler = (e) => {
     e.preventDefault();
 
-    // todo Сделать проверку на пустоту и максимальное заполнение
+    this.focuseOnInput();
 
-    this.#createNewTask();
+    if (!isLengthCorrect(this.#newTaskInput.value, TASK_LENGTH.MIN, TASK_LENGTH.MAX)) {
+      this.#newTaskInput.classList.add(CLASSES.WRONG_INPUT);
+
+      return;
+    }
+
+    this.#createNewTask(this.#newTaskInput.value);
+    this.#clearInput();
+  };
+
+  #resetWrongInputClassHandler = () => {
+    this.#newTaskInput.classList.remove(CLASSES.WRONG_INPUT);
+  };
+
+  #clearInput = () => {
+    this.#newTaskInput.value = SYMBOLS.EMPTY_STRING;
   };
 }
 
