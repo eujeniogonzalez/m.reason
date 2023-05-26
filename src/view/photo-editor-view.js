@@ -162,7 +162,7 @@ class PhotoEditorView {
 
     this.#clearImageBorder();
 
-    imageElement.height = size.scaledHeight;
+    imageElement.height = size.scaledHeight; // todo Подумать, можно ли применить деструктуризацию
     imageElement.width = size.scaledWidth;
 
     this.#editingImageBorderElement.append(imageElement);
@@ -220,7 +220,7 @@ class PhotoEditorView {
   };
 
   #insertCropFrameToBorder = (size) => {
-    const { mainSize, scaledHeight, scaledWidth, editingAreaHeight, editingAreaWidth } = size;
+    const { mainSize, scaledHeight, scaledWidth, editingAreaHeight, editingAreaWidth, sourceHeight, sourceWidth } = size;
     let lamodaRatio, cropFrameWidth, cropFrameHeight, cropFrameLeft, cropFrameTop;
 
     switch (mainSize) {
@@ -249,6 +249,7 @@ class PhotoEditorView {
         break;
     }
 
+    this.#cropFrameView.setMinCropFrameSize({ sourceHeight, sourceWidth, scaledHeight, scaledWidth });
     this.#editingImageBorderElement.append(this.#cropFrameView.element);
   };
 }

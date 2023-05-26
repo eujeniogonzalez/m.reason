@@ -1,4 +1,4 @@
-const { createElement, getStyle } = require('../utils.js');
+const { createElement, getStyle, addClass, removeClass } = require('../utils.js');
 const { FRAME_MOVING_DIRECTION, PHOTO_SIZE, MOVING_FRAME_BORDER } = require('../const.js');
 
 function createCropFrameTemplate() {
@@ -28,6 +28,9 @@ class CropFrameView {
   #isBorderBottomMoving = false;
   #frameHeight = null;
   #frameWidth = null;
+  #minFrameHeight = null;
+  #minFrameWidth = null;
+  #isCropFrameSizeValid = true;
 
   constructor() {
     this.#frameElement.addEventListener('mousedown', this.#frameMouseDownHandler);
@@ -53,6 +56,40 @@ class CropFrameView {
 
     return this.#element;
   }
+
+  setMinCropFrameSize = ({ sourceHeight, sourceWidth, scaledHeight, scaledWidth }) => {
+    const heightScale = sourceHeight / scaledHeight;
+    const widthScale = sourceWidth / scaledWidth;
+
+    this.#minFrameHeight = PHOTO_SIZE.LAMODA.HEIGHT / heightScale;
+    this.#minFrameWidth = PHOTO_SIZE.LAMODA.WIDTH / widthScale;
+  };
+
+  #validateCropFrameSize = ({ newFrameHeight, newFrameWidth }) => {
+    this.#isCropFrameSizeValid = (newFrameHeight < this.#minFrameHeight || newFrameWidth < this.#minFrameWidth) ? false : true;
+  };
+
+  #controlCropFrameSize = ({ newFrameHeight, newFrameWidth }) => {
+    const oldCropFrameSizeValid = this.#isCropFrameSizeValid;
+
+    this.#validateCropFrameSize({ newFrameHeight, newFrameWidth });
+
+    if (oldCropFrameSizeValid === this.#isCropFrameSizeValid) {
+      return;
+    }
+
+    switch (this.#isCropFrameSizeValid) {
+      case true:
+        removeClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
+        // todo Активировать кнопку
+        break;
+    
+      case false:
+        addClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
+        // todo Деактивировать кнопку
+        break;
+    }
+  };
 
   #setMovingValues = ({ e, movingFrameBorder }) => {
     this.#frameHeight = this.#frameElement.offsetHeight;
@@ -236,6 +273,8 @@ class CropFrameView {
     this.#frameElement.style.top = `${newFrameTop}px`;
     this.#frameElement.style.height = `${newFrameHeight}px`;
     this.#frameElement.style.width = `${newFrameWidth}px`;
+
+    this.#controlCropFrameSize({ newFrameHeight, newFrameWidth });
   };
 
   #borderTopMouseUpHandler = (e) => {
@@ -278,6 +317,8 @@ class CropFrameView {
     this.#frameElement.style.left = `${newFrameLeft}px`;
     this.#frameElement.style.height = `${newFrameHeight}px`;
     this.#frameElement.style.width = `${newFrameWidth}px`;
+
+    this.#controlCropFrameSize({ newFrameHeight, newFrameWidth });
   };
 
   #borderBottomMouseUpHandler = (e) => {

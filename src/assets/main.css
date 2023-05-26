@@ -453,7 +453,6 @@ main {
   top: 5px;
   right: 5px;
   cursor: pointer;
-  background-color: salmon;
   width: 15px;
   height: 15px;
   background: left center no-repeat url('./images/bin_icon_sprite_100x50.png');
@@ -474,6 +473,10 @@ main {
 
 .photo-editor-crop-frame:active {
   cursor: grabbing;
+}
+
+.photo-editor-crop-frame-not-valid {
+  border-color: var(--danger-color);
 }
 
 .photo-editor-crop-frame-top-border {

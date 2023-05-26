@@ -23,4 +23,12 @@ function getStyle(element, style) {
   return parseInt(window.getComputedStyle(element)[style], 10);
 }
 
-module.exports = { createElement, render, isElementActive, isLengthCorrect, getStyle };
+function addClass(element, className) {
+  element.classList.add(className);
+}
+
+function removeClass(element, className) {
+  element.classList.remove(className);
+}
+
+module.exports = { createElement, render, isElementActive, isLengthCorrect, getStyle, addClass, removeClass };
