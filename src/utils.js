@@ -19,4 +19,8 @@ function isLengthCorrect(string, min, max) {
   return (string.length > min && string.length <= max);
 }
 
-module.exports = { createElement, render, isElementActive, isLengthCorrect };
+function getStyle(element, style) {
+  return parseInt(window.getComputedStyle(element)[style], 10);
+}
+
+module.exports = { createElement, render, isElementActive, isLengthCorrect, getStyle };

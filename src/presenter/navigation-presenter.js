@@ -17,6 +17,7 @@ class NavigationPresenter {
     render(this.#navigationView.element, this.#mainElement);
   };
 
+  // todo Заменить название на navigationClickHandler
   #onNavigationClick = ({ hash }) => {
     this.#navigationModel.hash = hash;
   };

@@ -4,11 +4,12 @@ const { ROUTES, ACTIVE_ROUTE_CLASS } = require('../const.js');
 function createNavigationTemplate(hash) {
   return `
     <div class="navigation">
+      <a href="${ROUTES.TASKS.HASH}" class="nav-item ${ROUTES.TASKS.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.TASKS.NAME}</a>
+      <a href="${ROUTES.PHOTO_EDITOR.HASH}" class="nav-item ${ROUTES.PHOTO_EDITOR.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.PHOTO_EDITOR.NAME}</a>
       <a href="${ROUTES.DASHBOARD.HASH}" class="nav-item ${ROUTES.DASHBOARD.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.DASHBOARD.NAME}</a>
       <a href="${ROUTES.SHIPMENT.HASH}" class="nav-item ${ROUTES.SHIPMENT.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.SHIPMENT.NAME}</a>
       <a href="${ROUTES.CONVERTER.HASH}" class="nav-item ${ROUTES.CONVERTER.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.CONVERTER.NAME}</a>
       <a href="${ROUTES.COLLECTIONS.HASH}" class="nav-item ${ROUTES.COLLECTIONS.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.COLLECTIONS.NAME}</a>
-      <a href="${ROUTES.TASKS.HASH}" class="nav-item ${ROUTES.TASKS.HASH === hash ? ACTIVE_ROUTE_CLASS : ''}">${ROUTES.TASKS.NAME}</a>
     </div>
   `;
 }

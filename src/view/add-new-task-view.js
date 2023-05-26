@@ -2,6 +2,7 @@ const { createElement, isLengthCorrect } = require('../utils.js');
 const { TASK_LENGTH, CLASSES, SYMBOLS } = require('../const.js');
 
 function createAddNewTaskTemplate() {
+  // todo Выровнять в один ряд все view
   return `
     <div class="new-task-form-container">
       <form class="new-task-form">
@@ -14,7 +15,7 @@ function createAddNewTaskTemplate() {
         />
         <button
           id="new-task-submit"
-          class="new-task-submit input_submit"
+          class="new-task-submit button_submit"
           type="submit"
         >
           Создать задачу

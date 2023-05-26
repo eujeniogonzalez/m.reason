@@ -51,6 +51,10 @@ const ROUTES = {
   TASKS: {
     HASH: '#tasks',
     NAME: 'Задачи'
+  },
+  PHOTO_EDITOR: {
+    HASH: '#photoeditor',
+    NAME: 'Фоторедактор'
   }
 };
 
@@ -85,6 +89,37 @@ const LINK_ANCHORS = {
   REOPEN_TASK: 'Возобновить'
 };
 
+const MESSAGES = {
+  PHOTO_NOT_CHOSEN: 'Фото не выбрано'
+}
+
+const PHOTO_LANDSCAPE = {
+  HORIZONTAL: 'horizontal',
+  VERTICAL: 'vertical'
+};
+
+const PHOTO_SIZE = {
+  LAMODA: {
+    WIDTH: 762,
+    HEIGHT: 1100
+  }
+};
+
+const PHOTO_EDITING_MAIN_SIZE = {
+  HEIGHT: 'height',
+  WIDTH: 'width'
+};
+
+const FRAME_MOVING_DIRECTION = {
+  HORIZONTAL: 'horizontal',
+  VERTICAL: 'vertical'
+};
+
+const MOVING_FRAME_BORDER = {
+  TOP: 'top',
+  BOTTOM: 'bottom'
+};
+
 module.exports = {
   DEFAULT_WINDOW_SIZE,
   FOLDERS,
@@ -100,7 +135,13 @@ module.exports = {
   CLOSED_TASK_CLASS,
   SYMBOLS,
   LINK_ANCHORS,
-  START_TASK_ID
+  START_TASK_ID,
+  MESSAGES,
+  PHOTO_LANDSCAPE,
+  PHOTO_SIZE,
+  PHOTO_EDITING_MAIN_SIZE,
+  FRAME_MOVING_DIRECTION,
+  MOVING_FRAME_BORDER
 };
 
 

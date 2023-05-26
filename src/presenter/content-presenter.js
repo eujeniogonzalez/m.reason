@@ -4,6 +4,7 @@ const { ShipmentsPresenter } = require('./shipments-presenter.js');
 const { DashboardPresenter } = require('./dashboard-presenter.js');
 const { ConverterPresenter } = require('./converter-presenter.js');
 const { CollectionsPresenter } = require('./collections-presenter.js');
+const { PhotoEditorPresenter } = require('./photo-editor-presenter.js');
 const { contentElement } = require('../ui.js');
 
 class ContentPresenter {
@@ -13,6 +14,7 @@ class ContentPresenter {
   #dashboardPresenter = null;
   #converterPresenter = null;
   #collectionsPresenter = null;
+  #photoEditorPresenter = null;
 
   constructor({ navigationModel, tasksModel }) {
     this.#currentRoute = navigationModel.hash;
@@ -22,6 +24,7 @@ class ContentPresenter {
     this.#dashboardPresenter = new DashboardPresenter();
     this.#converterPresenter = new ConverterPresenter();
     this.#collectionsPresenter = new CollectionsPresenter();
+    this.#photoEditorPresenter = new PhotoEditorPresenter();
 
     navigationModel.addObserver(this.#changeCurrentRoute);
     navigationModel.addObserver(this.init);
@@ -45,6 +48,9 @@ class ContentPresenter {
         break;
       case ROUTES.TASKS.HASH:
         this.#tasksPresenter.init();
+        break;
+      case ROUTES.PHOTO_EDITOR.HASH:
+        this.#photoEditorPresenter.init();
         break;
     }
   };

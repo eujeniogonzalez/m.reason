@@ -2,8 +2,6 @@ const { createElement } = require('../utils.js');
 const { CLOSED_TASK_CLASS, SYMBOLS, LINK_ANCHORS } = require('../const.js');
 
 function createTaskListTemplate(taskList) {
-  let taskListTemplate;
-
   return `
     <div class="task-list">
       ${createTaskItemsTemplate(taskList)}
@@ -12,12 +10,14 @@ function createTaskListTemplate(taskList) {
 }
 
 function createTaskItemsTemplate(taskList) {
-  return taskList.length ?
-    taskListTemplate = taskList.map((task) => createTaskItemTemplate(task)).join(SYMBOLS.EMPTY_STRING) :
-    taskListTemplate = `<div class="task-list-empty">Нет ни одной задачи</div>`;
+  // todo Заменить сообщения на константы
+  return taskList.length 
+    ? taskList.map((task) => createTaskItemTemplate(task)).join(SYMBOLS.EMPTY_STRING) 
+    : `<div class="task-list-empty">Нет ни одной задачи</div>`;
 }
 
 function createTaskItemTemplate(task) {
+  // todo Заменить анкоры всех ссылок на константы
   return `
     <div class="task-item">
       <div class="task-item-date">${task.date}</div>
