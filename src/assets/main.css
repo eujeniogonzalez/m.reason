@@ -467,7 +467,7 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  border: 1px solid blueviolet;
+  border: 1px solid blueviolet; /* todo Заменить на константу */
   cursor: grab;
 }
 
@@ -495,5 +495,17 @@ main {
   bottom: -10px;
   left: 0;
   cursor: ns-resize;
+}
+
+.clear-editing-area-disabled {
+  cursor: not-allowed;
+  border-color: #666666;
+  color: #666666;
+}
+
+.save-new-crop-disabled {
+  cursor: not-allowed;
+  background-color: #666666;
+  border-color: #666666;
 }
 /* Photo editor styles (end) */

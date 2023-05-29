@@ -22,7 +22,7 @@ function createPhotoEditorTemplate() {
             </div>
           </div>
           <div class="photo-editor-editing-area-buttons">
-            <button id="clear-canvas" class="button_cancel" type="button">Очистить холст</button>
+            <button id="clear-editing-area" class="button_cancel" type="button">Очистить холст</button>
             <button id="save-new-crop" class="button_submit" type="button">Создать ракурс</button>
           </div>
         </div>
@@ -64,7 +64,8 @@ class PhotoEditorView {
   #sourcesElement = this.element.querySelector('.photo-editor-sources');
   #editingImageContainerElement = this.element.querySelector('.photo-editor-editing-area-image-container');
   #editingImageBorderElement = this.element.querySelector('.photo-editor-editing-area-image-border');
-  #clearImageBorderButton = this.element.querySelector('#clear-canvas');
+  #clearImageBorderButton = this.element.querySelector('#clear-editing-area');
+  #saveNewCropButton = this.element.querySelector('#save-new-crop');
   #cropFrameView = null;
 
   constructor({ cropFrameView }) {
@@ -72,6 +73,9 @@ class PhotoEditorView {
     this.#sourcesChooserElement.addEventListener('change', this.#sourcesInputChangeHandler);
     this.#sourcesElement.addEventListener('click', this.#sourcesElementClickHandler);
     this.#clearImageBorderButton.addEventListener('click', this.#resetImageBorder);
+
+    this.deActivateSaveNewCropButton();
+    this.#deActivateClearEditingAreaButton();
   }
 
   get element() {
@@ -81,6 +85,27 @@ class PhotoEditorView {
 
     return this.#element;
   }
+
+  activateSaveNewCropButton = () => {
+    this.#saveNewCropButton.disabled = false;
+    this.#saveNewCropButton.classList.remove('save-new-crop-disabled');
+  };
+
+  deActivateSaveNewCropButton = () => {
+    this.#saveNewCropButton.disabled = true;
+    this.#saveNewCropButton.classList.add('save-new-crop-disabled');
+  };
+
+
+  #activateClearEditingAreaButton = () => {
+    this.#clearImageBorderButton.disabled = false;
+    this.#clearImageBorderButton.classList.remove('clear-editing-area-disabled');
+  };
+
+  #deActivateClearEditingAreaButton = () => {
+    this.#clearImageBorderButton.disabled = true;
+    this.#clearImageBorderButton.classList.add('clear-editing-area-disabled');
+  };
 
   #sourcesInputChangeHandler = () => {
     if (!this.#sourcesChooserElement.files.length) {
@@ -126,6 +151,9 @@ class PhotoEditorView {
         this.#clearSourceItemSelection();
         this.#selectSourseItem(e.target.parentNode);
         this.#insertSourseImageToBorder(e.target.src);
+        this.activateSaveNewCropButton();
+        this.#activateClearEditingAreaButton();
+        // todo Сброс красной рамки кроппера
         break;
     }
   };
@@ -154,6 +182,8 @@ class PhotoEditorView {
     }
 
     selectedSourseItem.classList.remove('photo-editor-source-item-selected');
+    this.deActivateSaveNewCropButton();
+    this.#deActivateClearEditingAreaButton();
   };
 
   #insertSourseImageToBorder = (src) => {
@@ -250,6 +280,7 @@ class PhotoEditorView {
     }
 
     this.#cropFrameView.setMinCropFrameSize({ sourceHeight, sourceWidth, scaledHeight, scaledWidth });
+    this.#cropFrameView.removeCropFrameNotValidClass();
     this.#editingImageBorderElement.append(this.#cropFrameView.element);
   };
 }

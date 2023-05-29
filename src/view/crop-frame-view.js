@@ -31,8 +31,13 @@ class CropFrameView {
   #minFrameHeight = null;
   #minFrameWidth = null;
   #isCropFrameSizeValid = true;
+  #activateSaveNewCropButton = null;
+  #deActivateSaveNewCropButton = null;
 
-  constructor() {
+  constructor({ activateSaveNewCropButton, deActivateSaveNewCropButton }) {
+    this.#activateSaveNewCropButton = activateSaveNewCropButton;
+    this.#deActivateSaveNewCropButton = deActivateSaveNewCropButton;
+
     this.#frameElement.addEventListener('mousedown', this.#frameMouseDownHandler);
     this.#frameElement.addEventListener('mousemove', this.#frameMouseMoveHandler);
     this.#frameElement.addEventListener('mouseleave', this.#frameMouseUpHandler);
@@ -65,6 +70,10 @@ class CropFrameView {
     this.#minFrameWidth = PHOTO_SIZE.LAMODA.WIDTH / widthScale;
   };
 
+  removeCropFrameNotValidClass = () => {
+    removeClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
+  };
+
   #validateCropFrameSize = ({ newFrameHeight, newFrameWidth }) => {
     this.#isCropFrameSizeValid = (newFrameHeight < this.#minFrameHeight || newFrameWidth < this.#minFrameWidth) ? false : true;
   };
@@ -81,12 +90,12 @@ class CropFrameView {
     switch (this.#isCropFrameSizeValid) {
       case true:
         removeClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
-        // todo Активировать кнопку
+        this.#activateSaveNewCropButton();
         break;
     
       case false:
         addClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
-        // todo Деактивировать кнопку
+        this.#deActivateSaveNewCropButton();
         break;
     }
   };
