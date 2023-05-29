@@ -257,16 +257,16 @@ class CropFrameView {
     } = this.#getCurrentFrameSize({ e, movingFrameBorder: MOVING_FRAME_BORDER.TOP });
 
     switch (true) {
-      case newFrameTop <= 0:
+      case newFrameTop < 0:
         this.#isBorderTopMoving = false;
         newFrameTop = 0;
-        break;
+        return;
     
-      case newFrameHeight >= maxframeHeight:
+      case newFrameHeight > maxframeHeight:
         newFrameHeight = maxframeHeight;
-        break;
+        return;
 
-      case newFrameWidth >= maxFrameWidth:
+      case newFrameWidth > maxFrameWidth:
         return;
     }
 
