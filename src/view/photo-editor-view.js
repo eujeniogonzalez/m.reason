@@ -64,6 +64,7 @@ class PhotoEditorView {
   #sourcesElement = this.element.querySelector('.photo-editor-sources');
   #editingImageContainerElement = this.element.querySelector('.photo-editor-editing-area-image-container');
   #editingImageBorderElement = this.element.querySelector('.photo-editor-editing-area-image-border');
+  #editingImageSizeInfo = null;
   #clearImageBorderButton = this.element.querySelector('#clear-editing-area');
   #saveNewCropButton = this.element.querySelector('#save-new-crop');
   #cropFrameView = null;
@@ -73,6 +74,7 @@ class PhotoEditorView {
     this.#sourcesChooserElement.addEventListener('change', this.#sourcesInputChangeHandler);
     this.#sourcesElement.addEventListener('click', this.#sourcesElementClickHandler);
     this.#clearImageBorderButton.addEventListener('click', this.#resetImageBorder);
+    this.#saveNewCropButton.addEventListener('click', this.#createNewCrop);
 
     this.deActivateSaveNewCropButton();
     this.#deActivateClearEditingAreaButton();
@@ -243,7 +245,17 @@ class PhotoEditorView {
         break;
     }
 
-    return { sourceHeight, sourceWidth, sourceRatio, scaledHeight, scaledWidth, editingAreaHeight, editingAreaWidth };
+    this.#editingImageSizeInfo = { 
+      sourceHeight, 
+      sourceWidth, 
+      sourceRatio, 
+      scaledHeight, 
+      scaledWidth, 
+      editingAreaHeight, 
+      editingAreaWidth 
+    };
+
+    return this.#editingImageSizeInfo; // todo Сбросить this.#editingImageSizeInfo после очистки поля редактирования
   };
 
   #insertCropFrameToBorder = (size) => {
@@ -292,6 +304,19 @@ class PhotoEditorView {
     }
 
     return mainSize;
+  };
+
+  #createNewCrop = () => {
+    const { sourceHeight, sourceWidth, scaledHeight, scaledWidth } = this.#editingImageSizeInfo;
+    const { frameHeight, frameWidth, frameTop, frameLeft } = this.#cropFrameView.getFrameInfo();
+
+    console.log(sourceHeight, sourceWidth, scaledHeight, scaledWidth);
+    console.log(frameHeight, frameWidth, frameTop, frameLeft);
+
+    console.log(sourceHeight / scaledHeight);
+    console.log(sourceWidth / scaledWidth);
+
+    // Src оригинала
   };
 }
 

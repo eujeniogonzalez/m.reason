@@ -74,6 +74,15 @@ class CropFrameView {
     removeClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
   };
 
+  getFrameInfo = () => {
+    return {
+      frameHeight: this.#frameElement.offsetHeight,
+      frameWidth: this.#frameElement.offsetWidth,
+      frameTop: getStyle(this.#frameElement, 'top'),
+      frameLeft: getStyle(this.#frameElement, 'left')
+    };
+  };
+
   #validateCropFrameSize = ({ newFrameHeight, newFrameWidth }) => {
     this.#isCropFrameSizeValid = (newFrameHeight < this.#minFrameHeight || newFrameWidth < this.#minFrameWidth) ? false : true;
   };
