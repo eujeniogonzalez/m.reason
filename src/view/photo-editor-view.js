@@ -153,7 +153,6 @@ class PhotoEditorView {
         this.#insertSourseImageToBorder(e.target.src);
         this.activateSaveNewCropButton();
         this.#activateClearEditingAreaButton();
-        // todo Сброс красной рамки кроппера
         break;
     }
   };
@@ -206,6 +205,8 @@ class PhotoEditorView {
   #resetImageBorder = () => {
     this.#editingImageBorderElement.innerHTML = MESSAGES.PHOTO_NOT_CHOSEN;
     this.#clearSourceItemSelection();
+    this.#deActivateClearEditingAreaButton();
+    this.deActivateSaveNewCropButton();
   };
 
   #getEditingImageSizeInfo = (imageElement) => {
@@ -215,7 +216,7 @@ class PhotoEditorView {
     const editingAreaHeight = this.#editingImageContainerElement.offsetHeight - innerPadding * 2;
     const editingAreaWidth = this.#editingImageContainerElement.offsetWidth - innerPadding * 2;
     const landscape = imageElement.width <= imageElement.height ? PHOTO_LANDSCAPE.VERTICAL : PHOTO_LANDSCAPE.HORIZONTAL;
-    let sourceRatio, scaledHeight, scaledWidth, mainSize;
+    let sourceRatio, scaledHeight, scaledWidth;
 
     switch (landscape) {
       case PHOTO_LANDSCAPE.HORIZONTAL:
@@ -224,11 +225,9 @@ class PhotoEditorView {
         if (editingAreaWidth * sourceRatio >= editingAreaHeight) {
           scaledWidth = editingAreaHeight / sourceRatio;
           scaledHeight = editingAreaHeight;
-          mainSize = PHOTO_EDITING_MAIN_SIZE.HEIGHT;
         } else {
           scaledWidth = editingAreaWidth;
           scaledHeight = editingAreaWidth * sourceRatio;
-          mainSize = PHOTO_EDITING_MAIN_SIZE.WIDTH;
         }
         break;
       case PHOTO_LANDSCAPE.VERTICAL:
@@ -237,20 +236,19 @@ class PhotoEditorView {
         if (editingAreaHeight * sourceRatio > editingAreaWidth) {
           scaledHeight = editingAreaWidth / sourceRatio;
           scaledWidth = editingAreaWidth;
-          mainSize = PHOTO_EDITING_MAIN_SIZE.WIDTH;
         } else {
           scaledHeight = editingAreaHeight;
           scaledWidth = editingAreaHeight * sourceRatio;
-          mainSize = PHOTO_EDITING_MAIN_SIZE.HEIGHT;
         }
         break;
     }
 
-    return { mainSize, sourceHeight, sourceWidth, sourceRatio, scaledHeight, scaledWidth, editingAreaHeight, editingAreaWidth };
+    return { sourceHeight, sourceWidth, sourceRatio, scaledHeight, scaledWidth, editingAreaHeight, editingAreaWidth };
   };
 
   #insertCropFrameToBorder = (size) => {
-    const { mainSize, scaledHeight, scaledWidth, editingAreaHeight, editingAreaWidth, sourceHeight, sourceWidth } = size;
+    const { scaledHeight, scaledWidth, sourceHeight, sourceWidth } = size;
+    const mainSize = this.#getImageMainSize(scaledWidth, scaledHeight);
     let lamodaRatio, cropFrameWidth, cropFrameHeight, cropFrameLeft, cropFrameTop;
 
     switch (mainSize) {
@@ -258,7 +256,7 @@ class PhotoEditorView {
         lamodaRatio = PHOTO_SIZE.LAMODA.WIDTH / PHOTO_SIZE.LAMODA.HEIGHT;
         cropFrameWidth = scaledHeight * lamodaRatio;
         cropFrameHeight = scaledHeight;
-        cropFrameLeft = (editingAreaWidth - cropFrameWidth) / 2;
+        cropFrameLeft = (this.#editingImageBorderElement.offsetWidth - cropFrameWidth) / 2;
         
         this.#cropFrameView.element.style.height = `${cropFrameHeight}px`;
         this.#cropFrameView.element.style.width = `${cropFrameWidth}px`;
@@ -270,7 +268,7 @@ class PhotoEditorView {
         lamodaRatio = PHOTO_SIZE.LAMODA.HEIGHT / PHOTO_SIZE.LAMODA.WIDTH;
         cropFrameWidth = scaledWidth;
         cropFrameHeight = scaledWidth * lamodaRatio;
-        cropFrameTop = (editingAreaHeight - cropFrameHeight) / 2;
+        cropFrameTop = (this.#editingImageBorderElement.offsetHeight - cropFrameHeight) / 2;
 
         this.#cropFrameView.element.style.height = `${cropFrameHeight}px`;
         this.#cropFrameView.element.style.width = `${cropFrameWidth}px`;
@@ -282,6 +280,18 @@ class PhotoEditorView {
     this.#cropFrameView.setMinCropFrameSize({ sourceHeight, sourceWidth, scaledHeight, scaledWidth });
     this.#cropFrameView.removeCropFrameNotValidClass();
     this.#editingImageBorderElement.append(this.#cropFrameView.element);
+  };
+
+  #getImageMainSize = (width, height) => {
+    let mainSize;
+
+    if (width / height >= PHOTO_SIZE.LAMODA.WIDTH / PHOTO_SIZE.LAMODA.HEIGHT) {
+      mainSize = PHOTO_EDITING_MAIN_SIZE.WIDTH;
+    } else {
+      mainSize = PHOTO_EDITING_MAIN_SIZE.HEIGHT;
+    }
+
+    return mainSize;
   };
 }
 
