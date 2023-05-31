@@ -498,13 +498,13 @@ main {
 }
 
 .clear-editing-area-disabled {
-  cursor: not-allowed;
+  cursor: default;
   border-color: #666666;
   color: #666666;
 }
 
 .save-new-crop-disabled {
-  cursor: not-allowed;
+  cursor: default;
   background-color: #666666;
   border-color: #666666;
 }
