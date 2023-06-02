@@ -1,4 +1,4 @@
-const { RENDER_POSITION } = require('./const.js');
+const { RENDER_POSITION } = require('../const.js');
 
 function createElement(template) {
   const newElement = document.createElement('div');

@@ -2,7 +2,7 @@ const { AddNewTaskPresenter } = require('./add-new-task-presenter.js');
 const { TaskListPresenter } = require('./task-list-presenter.js');
 const { TasksView } = require('../view/tasks-view.js');
 const { contentElement } = require('../ui.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 
 class TasksPresenter {
   #tasksView = null;

@@ -1,4 +1,4 @@
-const { createElement } = require('../utils.js');
+const { createElement } = require('../utils/common-utils.js');
 
 function createDashboardTemplate() {
   return `

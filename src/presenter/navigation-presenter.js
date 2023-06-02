@@ -1,6 +1,6 @@
 const { mainElement } = require('../ui.js');
 const { NavigationView } = require('../view/navigation-view.js');
-const { render } = require('../utils.js');
+const { render } = require('../utils/common-utils.js');
 
 class NavigationPresenter {
   #mainElement = null;

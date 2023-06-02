@@ -1,4 +1,4 @@
-const { createElement, getStyle, addClass, removeClass } = require('../utils.js');
+const { createElement, getStyle, addClass, removeClass } = require('../utils/common-utils.js');
 const { FRAME_MOVING_DIRECTION, PHOTO_SIZE, MOVING_FRAME_BORDER } = require('../const.js');
 
 function createCropFrameTemplate() {

@@ -1,6 +1,6 @@
 const { CollectionsView } = require('../view/collections-view.js');
 const { contentElement } = require('../ui.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 
 class CollectionsPresenter {
   #collectionsView = null;

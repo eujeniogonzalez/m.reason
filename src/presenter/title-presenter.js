@@ -1,6 +1,6 @@
 const { headerElement } = require('../ui.js');
 const { TitleView } = require('../view/title-view.js');
-const { render } = require('../utils.js');
+const { render } = require('../utils/common-utils.js');
 const { ROUTES, RENDER_POSITION, ACTIONS } = require('../const.js');
 
 class TitlePresenter {

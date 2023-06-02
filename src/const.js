@@ -90,7 +90,8 @@ const LINK_ANCHORS = {
 };
 
 const MESSAGES = {
-  PHOTO_NOT_CHOSEN: 'Фото не выбрано'
+  PHOTO_NOT_CHOSEN: 'Фото не выбрано',
+  CROPS_NOT_CREATED: 'Ракурсы пока не созданы'
 }
 
 const PHOTO_LANDSCAPE = {

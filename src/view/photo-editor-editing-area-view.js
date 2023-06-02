@@ -1,4 +1,4 @@
-const { createElement } = require('../utils.js');
+const { createElement } = require('../utils/common-utils.js');
 const { MESSAGES, PHOTO_LANDSCAPE, SYMBOLS, PHOTO_SIZE, PHOTO_EDITING_MAIN_SIZE } = require('../const.js');
 
 function createPhotoEditorEditingAreaTemplate() {
@@ -29,6 +29,7 @@ class PhotoEditorEditingAreaView {
   #cropFrameView = null;
   #clearSourceItemSelection = null;
   #insertNewCropToResults = null;
+  #currentSourceImageSrc = null; // todo Не забыть сбросить при очистке editing area
   #editingImageContainerElement = this.element.querySelector('.photo-editor-editing-area-image-container');
   #editingImageBorderElement = this.element.querySelector('.photo-editor-editing-area-image-border');
   #clearImageBorderButton = this.element.querySelector('#clear-editing-area');
@@ -55,6 +56,8 @@ class PhotoEditorEditingAreaView {
   }
 
   insertSourseImageToBorder = (src) => {
+    this.#currentSourceImageSrc = src;
+
     const imageElement = createElement(createEditingImageTemplate(src));
     const size = this.#getEditingImageSizeInfo(imageElement);
 
@@ -200,15 +203,14 @@ class PhotoEditorEditingAreaView {
     const { sourceHeight, sourceWidth, scaledHeight, scaledWidth } = this.#editingImageSizeInfo;
     const { frameHeight, frameWidth, frameTop, frameLeft } = this.#cropFrameView.getFrameInfo();
 
-    // console.log(sourceHeight, sourceWidth, scaledHeight, scaledWidth);
-    // console.log(frameHeight, frameWidth, frameTop, frameLeft);
+    const croppedHeight = (sourceHeight / scaledHeight) * frameHeight;
+    const croppedWidth = (sourceWidth / scaledWidth) * frameWidth;
+    const croppedTop = (sourceHeight / scaledHeight) * frameTop;
+    const croppedLeft = (sourceWidth / scaledWidth) * frameLeft;
 
-    // console.log(sourceHeight / scaledHeight);
-    // console.log(sourceWidth / scaledWidth);
+    const sourceSrc = this.#currentSourceImageSrc;
 
-    // Src оригинала
-
-    this.#insertNewCropToResults();
+    this.#insertNewCropToResults({ sourceSrc, croppedHeight, croppedWidth, croppedTop, croppedLeft });
   };
 }
 

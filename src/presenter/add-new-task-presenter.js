@@ -1,5 +1,5 @@
 const { AddNewTaskView } = require('../view/add-new-task-view.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 const { contentElement } = require('../ui.js');
 
 class AddNewTaskPresenter {

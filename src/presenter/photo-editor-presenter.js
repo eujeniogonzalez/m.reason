@@ -4,7 +4,7 @@ const { PhotoEditorSourcesView } = require('../view/photo-editor-sources-view.js
 const { PhotoEditorResultView } = require('../view/photo-editor-result-view.js');
 const { PhotoEditorEditingAreaView } = require('../view/photo-editor-editing-area-view.js');
 const { contentElement } = require('../ui.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 const { RENDER_POSITION } = require('../const.js');
 
 // todo Попробовать заменить все параметры функций на объекты

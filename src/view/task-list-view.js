@@ -1,4 +1,4 @@
-const { createElement } = require('../utils.js');
+const { createElement } = require('../utils/common-utils.js');
 const { CLOSED_TASK_CLASS, SYMBOLS, LINK_ANCHORS } = require('../const.js');
 
 function createTaskListTemplate(taskList) {

@@ -1,6 +1,6 @@
 const { ShipmentsView } = require('../view/shipments-view.js');
 const { contentElement } = require('../ui.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 
 class ShipmentsPresenter {
   #shipmentsView = null;

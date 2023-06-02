@@ -1,6 +1,6 @@
 const { DashboardView } = require('../view/dashboard-view.js');
 const { contentElement } = require('../ui.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 
 class DashboardPresenter {
   #dashboardView = null;

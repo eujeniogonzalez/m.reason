@@ -1,4 +1,4 @@
-const { createElement, isLengthCorrect } = require('../utils.js');
+const { createElement, isLengthCorrect } = require('../utils/common-utils.js');
 const { TASK_LENGTH, CLASSES, SYMBOLS } = require('../const.js');
 
 function createAddNewTaskTemplate() {

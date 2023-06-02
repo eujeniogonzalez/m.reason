@@ -1,4 +1,4 @@
-const { createElement, isElementActive } = require('../utils.js');
+const { createElement, isElementActive } = require('../utils/common-utils.js');
 const { ROUTES, ACTIVE_ROUTE_CLASS } = require('../const.js');
 
 function createNavigationTemplate(hash) {

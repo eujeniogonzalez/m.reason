@@ -1,5 +1,5 @@
 const { TaskListView } = require('../view/task-list-view.js');
-const { render } = require('../utils');
+const { render } = require('../utils/common-utils.js');
 const { contentElement } = require('../ui.js');
 const { RENDER_POSITION, ACTIONS } = require('../const.js');
 
