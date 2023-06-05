@@ -43,16 +43,11 @@ function waitingImageLoading(imageElement) {
 // scales the image by (float) scale < 1
 // returns a canvas containing the scaled image.
 function downScaleImage(img, scale, height, width, left, top) {
-
   height = Math.ceil(1100 / scale); // todo Заменить на константу
   width = Math.ceil(762 / scale); // todo Заменить на константу
-
   const imgCV = document.createElement('canvas');
-  console.log(width, height);
   imgCV.width = width;
   imgCV.height = height;
-  console.log(imgCV.width * scale, imgCV.height * scale);
-  console.log(762 / scale, 1100 / scale);
   const imgCtx = imgCV.getContext('2d');
   imgCtx.drawImage(img, left, top, width, height, 0, 0, width, height);
   return downScaleCanvas(imgCV, scale);

@@ -27,7 +27,9 @@ function createPhotoEditorResultItemTemplate(src) {
   `;
 }
 
-function createPhotoEditorResultEmptyTemplate(src) {
+// todo Сократить названия вспомогательных функций
+
+function createResultEmptyTemplate() {
   return `
     <div class="photo-editor-result-empty">
       ${MESSAGES.CROPS_NOT_CREATED}
@@ -35,13 +37,22 @@ function createPhotoEditorResultEmptyTemplate(src) {
   `;
 }
 
+function createResultItemsWrapperTemplate() {
+  return `
+    <div class="photo-editor-result-items-wrapper"></div>
+  `;
+}
+
 class PhotoEditorResultView {
   #element = null;
   #resultContainerElement = null;
+  #resultItemsWrapperElement = null;
   #resultItems = null;
 
   constructor() {
     this.#resultContainerElement = this.element.querySelector('.photo-editor-result-container');
+
+    this.#resultContainerElement.addEventListener('click', this.#resultContainerElementClickHandler);
   }
 
   get element() {
@@ -61,7 +72,8 @@ class PhotoEditorResultView {
     const resultImage = createElement(createPhotoEditorResultItemTemplate(downScaledImage));
 
     this.#clearEmptyTemplate();
-    this.#resultContainerElement.append(resultImage);
+    this.#insertResultItemsWrapperElement();
+    this.#resultItemsWrapperElement.append(resultImage);
     this.#updateResultItemsElements();
   };
 
@@ -73,8 +85,47 @@ class PhotoEditorResultView {
     this.#resultContainerElement.innerHTML = ''; // todo Заменить на константу
   };
 
+  #insertEmptyTemplate = () => {
+    if (this.#resultItems) {
+      return;
+    }
+
+    const emptyTemplate = createElement(createResultEmptyTemplate())
+
+    this.#resultContainerElement.innerHTML = ''; // todo Заменить на константу
+    this.#resultItemsWrapperElement = null;
+
+    this.#resultContainerElement.append(emptyTemplate);
+  };
+
   #updateResultItemsElements = () => {
-    this.#resultItems = this.element.querySelectorAll('.photo-editor-result-item');
+    const resultItems = this.element.querySelectorAll('.photo-editor-result-item');
+    this.#resultItems = resultItems.length ? resultItems : null;
+  };
+
+  #insertResultItemsWrapperElement = () => {
+    if (this.#resultItemsWrapperElement) {
+      return;
+    }
+
+    const resultItemsWrapperElement = createElement(createResultItemsWrapperTemplate());
+    
+    this.#resultContainerElement.append(resultItemsWrapperElement);
+    this.#resultItemsWrapperElement = this.element.querySelector('.photo-editor-result-items-wrapper');
+  };
+
+  #removeResultItem = (resultItemElement) => {
+    this.#resultItemsWrapperElement.removeChild(resultItemElement);
+    this.#updateResultItemsElements();
+  };
+
+  #resultContainerElementClickHandler = (e) => {
+    switch (true) {
+      case e.target.classList.contains('photo-editor-result-item-delete'):
+        this.#removeResultItem(e.target.parentNode);
+        this.#insertEmptyTemplate();
+        break;
+    }
   };
 }
 
