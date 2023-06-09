@@ -3,7 +3,7 @@ const { ROUTES, ACTIONS } = require('../const.js');
 
 class NavigationModel extends Observable {
   // #currentHash = ROUTES.TASKS.HASH;
-  #currentHash = ROUTES.PHOTO_EDITOR.HASH; // todo После завершения работы над редактором вернуть задачи по умолчанию
+  #currentHash = ROUTES.PHOTO_EDITOR.HASH; // todo После завершения работы над редактором вернуть раздел "Задачи" по умолчанию
 
   get hash() {
     return this.#currentHash;

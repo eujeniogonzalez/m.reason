@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS, CHANNELS } = require('./src/const.js');
 const Store = require('./store.js');
 
@@ -25,6 +25,8 @@ function createWindow() {
   });
 
   // mainWindow.setMenu(null); // Удаляем меню браузера
+
+  console.log(dialog.showOpenDialog({ properties: ['openDirectory'] }).then((res) => console.log(res)));
 
   mainWindow.webContents.openDevTools();
 

@@ -3,7 +3,7 @@
 // const img = document.querySelector('.devka');
 
 // #################################################
-
+// todo Убрать все комментарии и провести рефакторинг
 function waitingImageLoading(imageElement) {
   return new Promise(res => {
       if (imageElement.complete) {

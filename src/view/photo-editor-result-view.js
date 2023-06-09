@@ -1,5 +1,6 @@
 const { createElement } = require('../utils/common-utils.js');
 const { downScaleImage } = require('../utils/downscale-image-utils.js');
+const { DragAndDrop } = require('../utils/drag-and-drop-class.js');
 const { MESSAGES, PHOTO_SIZE } = require('../const.js');
 
 function createPhotoEditorResultTemplate() {
@@ -18,11 +19,13 @@ function createPhotoEditorResultTemplate() {
   `;
 }
 
-function createPhotoEditorResultItemTemplate(src) {
+function createPhotoEditorResultItemTemplate(src, index) {
   return `
     <div class="photo-editor-result-item">
-      <div class="photo-editor-result-item-delete"></div>
-      <img class="photo-editor-result-item-image" src="${src}" />
+      <div class="photo-editor-result-draggable-item" draggable="true" id=item-${index}>
+        <div class="photo-editor-result-item-delete"></div>
+        <img class="photo-editor-result-item-image" src="${src}" draggable="false" />
+      </div>
     </div>
   `;
 }
@@ -48,11 +51,17 @@ class PhotoEditorResultView {
   #resultContainerElement = null;
   #resultItemsWrapperElement = null;
   #resultItems = null;
+  #dragAndDrop = null;
+  #lastDraggableItemIndex = 0;
 
   constructor() {
     this.#resultContainerElement = this.element.querySelector('.photo-editor-result-container');
-
     this.#resultContainerElement.addEventListener('click', this.#resultContainerElementClickHandler);
+
+    this.#dragAndDrop = new DragAndDrop({
+      draggingClassName: 'dragging',
+      draggableItemClassName: 'photo-editor-result-draggable-item' // todo Заменить на константы
+    });
   }
 
   get element() {
@@ -69,26 +78,32 @@ class PhotoEditorResultView {
 
     const scale = PHOTO_SIZE.LAMODA.WIDTH / croppedWidth;
     const downScaledImage = downScaleImage(newCropImage, scale, croppedHeight, croppedWidth, croppedLeft, croppedTop).toDataURL('image/jpeg', 1); // todo Заменить на константу
-    const resultImage = createElement(createPhotoEditorResultItemTemplate(downScaledImage));
+    const resultImage = createElement(createPhotoEditorResultItemTemplate(downScaledImage, this.#getDruggableItemIndex()));
 
     this.#clearEmptyTemplate();
     this.#insertResultItemsWrapperElement();
     this.#resultItemsWrapperElement.append(resultImage);
     this.#updateResultItemsElements();
+
+    this.#dragAndDrop.updateItems({
+      container: this.element,
+      items: this.#resultItems,
+      draggableItems: this.element.querySelectorAll('.photo-editor-result-draggable-item')
+    });
+  };
+
+  #getDruggableItemIndex = () => {
+    return this.#lastDraggableItemIndex++;
   };
 
   #clearEmptyTemplate = () => {
-    if (this.#resultItems) {
-      return;
-    }
+    if (this.#resultItems) return;
 
     this.#resultContainerElement.innerHTML = ''; // todo Заменить на константу
   };
 
   #insertEmptyTemplate = () => {
-    if (this.#resultItems) {
-      return;
-    }
+    if (this.#resultItems) return;
 
     const emptyTemplate = createElement(createResultEmptyTemplate())
 
@@ -104,9 +119,7 @@ class PhotoEditorResultView {
   };
 
   #insertResultItemsWrapperElement = () => {
-    if (this.#resultItemsWrapperElement) {
-      return;
-    }
+    if (this.#resultItemsWrapperElement) return;
 
     const resultItemsWrapperElement = createElement(createResultItemsWrapperTemplate());
     
@@ -117,12 +130,18 @@ class PhotoEditorResultView {
   #removeResultItem = (resultItemElement) => {
     this.#resultItemsWrapperElement.removeChild(resultItemElement);
     this.#updateResultItemsElements();
+
+    this.#dragAndDrop.updateItems({
+      container: this.element,
+      items: this.#resultItems,
+      draggableItems: this.element.querySelectorAll('.photo-editor-result-draggable-item') // todo Создать функцию по обновлению дрэгабл айтемс
+    });
   };
 
   #resultContainerElementClickHandler = (e) => {
     switch (true) {
       case e.target.classList.contains('photo-editor-result-item-delete'):
-        this.#removeResultItem(e.target.parentNode);
+        this.#removeResultItem(e.target.closest('.photo-editor-result-item'));
         this.#insertEmptyTemplate();
         break;
     }

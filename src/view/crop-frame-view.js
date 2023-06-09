@@ -92,9 +92,7 @@ class CropFrameView {
 
     this.#validateCropFrameSize({ newFrameHeight, newFrameWidth });
 
-    if (oldCropFrameSizeValid === this.#isCropFrameSizeValid) {
-      return;
-    }
+    if (oldCropFrameSizeValid === this.#isCropFrameSizeValid) return;
 
     switch (this.#isCropFrameSizeValid) {
       case true:
@@ -218,9 +216,7 @@ class CropFrameView {
   };
 
   #frameMouseMoveHandler = (e) => {
-    if (!this.#isFrameMoving) {
-      return;
-    }
+    if (!this.#isFrameMoving) return;
 
     this.#mouseMoveCurrentX = e.clientX;
     this.#mouseMoveCurrentY = e.clientY;
@@ -246,9 +242,7 @@ class CropFrameView {
   };
 
   #frameMouseUpHandler = () => {
-    if (!this.#isFrameMoving) {
-      return;
-    }
+    if (!this.#isFrameMoving) return;
 
     this.#resetMovingValues();
   };
@@ -262,9 +256,7 @@ class CropFrameView {
   };
 
   #borderTopMouseMoveHandler = (e) => {
-    if (!this.#isBorderTopMoving) {
-      return;
-    }
+    if (!this.#isBorderTopMoving) return;
 
     let { 
       newFrameTop, 
@@ -296,9 +288,7 @@ class CropFrameView {
   };
 
   #borderTopMouseUpHandler = (e) => {
-    if (!this.#isBorderTopMoving) {
-      return;
-    }
+    if (!this.#isBorderTopMoving) return;
 
     this.#resetMovingValues();
   };
@@ -312,9 +302,7 @@ class CropFrameView {
   };
 
   #borderBottomMouseMoveHandler = (e) => {
-    if (!this.#isBorderBottomMoving) {
-      return;
-    }
+    if (!this.#isBorderBottomMoving) return;
 
     let { 
       newFrameLeft, 
@@ -339,10 +327,8 @@ class CropFrameView {
     this.#controlCropFrameSize({ newFrameHeight, newFrameWidth });
   };
 
-  #borderBottomMouseUpHandler = (e) => {
-    if (!this.#isBorderBottomMoving) {
-      return;
-    }
+  #borderBottomMouseUpHandler = () => {
+    if (!this.#isBorderBottomMoving) return;
 
     this.#resetMovingValues();
   };

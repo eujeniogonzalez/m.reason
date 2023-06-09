@@ -446,12 +446,22 @@ main {
   display: none;
 }
 
-.photo-editor-source-item, .photo-editor-result-item {
+.photo-editor-source-item {
   position: relative;
   cursor: pointer;
   border-radius: 5px;
   overflow: hidden;
-  background-color: salmon;
+}
+
+.photo-editor-result-item {
+  position: relative;
+  cursor: grab;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dragging {
+  display: none;
 }
 
 .photo-editor-source-item-selected {
@@ -459,10 +469,17 @@ main {
   cursor: default;
 }
 
-.photo-editor-source-item-image, .photo-editor-result-item-image {
+.photo-editor-source-item-image {
   display: block;
   width: auto;
   height: 150px;
+}
+
+.photo-editor-result-item-image {
+  display: block;
+  width: auto;
+  height: 150px;
+  pointer-events: none;
 }
 
 .photo-editor-source-item-delete, .photo-editor-result-item-delete {

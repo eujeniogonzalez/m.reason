@@ -46,9 +46,7 @@ class PhotoEditorSourcesView {
   clearSourceItemSelection = () => {
     const selectedSourseItem = this.#element.querySelector('.photo-editor-source-item-selected');
 
-    if (!selectedSourseItem) {
-      return;
-    }
+    if (!selectedSourseItem) return;
 
     selectedSourseItem.classList.remove('photo-editor-source-item-selected');
   };
@@ -91,9 +89,7 @@ class PhotoEditorSourcesView {
   };
 
   #sourcesInputChangeHandler = () => {
-    if (!this.#sourcesChooserElement.files.length) {
-      return;
-    }
+    if (!this.#sourcesChooserElement.files.length) return;
 
     // todo Выделить в отдельный метод
     Array.from(this.#sourcesChooserElement.files).forEach((file) => {
