@@ -12,8 +12,8 @@ function createPhotoEditorResultTemplate() {
         </div>
       </div>
       <div class="photo-editor-editing-area-buttons">
-        <button id="clear-editing-area" class="button_cancel" type="button">Очистить холст</button>
-        <button id="save-new-crop" class="button_submit" type="button">Создать ракурс</button>
+        <input id="crops-base-name" class="crop-base-name" type="text" placeholder="Метка" minlength="3" maxlength="3">
+        <button id="save-all-crops" class="button_submit" type="button">Сохранить ракурсы</button>
       </div>
     </div>
   `;
@@ -48,20 +48,29 @@ function createResultItemsWrapperTemplate() {
 
 class PhotoEditorResultView {
   #element = null;
-  #resultContainerElement = null;
   #resultItemsWrapperElement = null;
   #resultItems = null;
   #dragAndDrop = null;
-  #lastDraggableItemIndex = 0;
+  #lastDraggableItemIndex = 0; // todo Вынести в константу
+  #saveAllCrops = null;
 
-  constructor() {
-    this.#resultContainerElement = this.element.querySelector('.photo-editor-result-container');
+  #resultContainerElement = this.element.querySelector('.photo-editor-result-container');
+  #cropsBaseNameElement = this.element.querySelector('#crops-base-name');
+  #saveAllCropsButton = this.element.querySelector('#save-all-crops');
+
+  constructor({ saveAllCrops }) {
+    this.#saveAllCrops = saveAllCrops;
+
     this.#resultContainerElement.addEventListener('click', this.#resultContainerElementClickHandler);
+    this.#saveAllCropsButton.addEventListener('click', this.#saveAllCropsButtonClickHandler);
+    this.#cropsBaseNameElement.addEventListener('input', this.#cropsBaseNameElementInputHandler);
 
     this.#dragAndDrop = new DragAndDrop({
-      draggingClassName: 'dragging',
+      draggingClassName: 'dragging', // todo Перенести контейнер сюда
       draggableItemClassName: 'photo-editor-result-draggable-item' // todo Заменить на константы
     });
+
+    this.#deactivateSaveAllCropsButton();
   }
 
   get element() {
@@ -84,6 +93,7 @@ class PhotoEditorResultView {
     this.#insertResultItemsWrapperElement();
     this.#resultItemsWrapperElement.append(resultImage);
     this.#updateResultItemsElements();
+    this.#updateSaveAllCropsButtonActivity();
 
     this.#dragAndDrop.updateItems({
       container: this.element,
@@ -130,12 +140,31 @@ class PhotoEditorResultView {
   #removeResultItem = (resultItemElement) => {
     this.#resultItemsWrapperElement.removeChild(resultItemElement);
     this.#updateResultItemsElements();
+    this.#updateSaveAllCropsButtonActivity();
 
     this.#dragAndDrop.updateItems({
       container: this.element,
       items: this.#resultItems,
       draggableItems: this.element.querySelectorAll('.photo-editor-result-draggable-item') // todo Создать функцию по обновлению дрэгабл айтемс
     });
+  };
+
+  #activateSaveAllCropsButton = () => {
+    this.#saveAllCropsButton.disabled = false;
+    this.#saveAllCropsButton.classList.remove('save-all-crops-disabled');
+  };
+
+  #deactivateSaveAllCropsButton = () => {
+    this.#saveAllCropsButton.disabled = true;
+    this.#saveAllCropsButton.classList.add('save-all-crops-disabled');
+  };
+
+  #updateSaveAllCropsButtonActivity = () => {
+    if (!this.#resultItems || this.#cropsBaseNameElement.value.length < 3) { // todo Вынести в константу
+      this.#deactivateSaveAllCropsButton();
+    } else {
+      this.#activateSaveAllCropsButton();
+    }
   };
 
   #resultContainerElementClickHandler = (e) => {
@@ -145,6 +174,16 @@ class PhotoEditorResultView {
         this.#insertEmptyTemplate();
         break;
     }
+  };
+
+  #saveAllCropsButtonClickHandler = () => {
+    const crops = this.element.querySelectorAll('.photo-editor-result-item-image');
+
+    this.#saveAllCrops({ crops, baseName: this.#cropsBaseNameElement.value });
+  };
+
+  #cropsBaseNameElementInputHandler = () => {
+    this.#updateSaveAllCropsButtonActivity();
   };
 }
 

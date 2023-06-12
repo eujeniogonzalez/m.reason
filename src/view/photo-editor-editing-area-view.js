@@ -43,7 +43,7 @@ class PhotoEditorEditingAreaView {
     this.#clearImageBorderButton.addEventListener('click', this.#resetImageBorder);
     this.#saveNewCropButton.addEventListener('click', this.#createNewCrop);
 
-    this.deActivateSaveNewCropButton();
+    this.deactivateSaveNewCropButton();
     this.#deActivateClearEditingAreaButton();
   }
 
@@ -78,7 +78,7 @@ class PhotoEditorEditingAreaView {
     this.#saveNewCropButton.classList.remove('save-new-crop-disabled');
   };
 
-  deActivateSaveNewCropButton = () => {
+  deactivateSaveNewCropButton = () => {
     this.#saveNewCropButton.disabled = true;
     this.#saveNewCropButton.classList.add('save-new-crop-disabled');
   };
@@ -196,7 +196,7 @@ class PhotoEditorEditingAreaView {
     this.#editingImageBorderElement.innerHTML = MESSAGES.PHOTO_NOT_CHOSEN;
     this.#clearSourceItemSelection();
     this.#deActivateClearEditingAreaButton();
-    this.deActivateSaveNewCropButton();
+    this.deactivateSaveNewCropButton();
   };
 
   #createNewCrop = () => {

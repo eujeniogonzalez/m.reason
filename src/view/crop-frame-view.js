@@ -32,11 +32,11 @@ class CropFrameView {
   #minFrameWidth = null;
   #isCropFrameSizeValid = true;
   #activateSaveNewCropButton = null;
-  #deActivateSaveNewCropButton = null;
+  #deactivateSaveNewCropButton = null;
 
-  constructor({ activateSaveNewCropButton, deActivateSaveNewCropButton }) {
+  constructor({ activateSaveNewCropButton, deactivateSaveNewCropButton }) {
     this.#activateSaveNewCropButton = activateSaveNewCropButton;
-    this.#deActivateSaveNewCropButton = deActivateSaveNewCropButton;
+    this.#deactivateSaveNewCropButton = deactivateSaveNewCropButton;
 
     this.#frameElement.addEventListener('mousedown', this.#frameMouseDownHandler);
     this.#frameElement.addEventListener('mousemove', this.#frameMouseMoveHandler);
@@ -102,7 +102,7 @@ class CropFrameView {
     
       case false:
         addClass(this.#frameElement, 'photo-editor-crop-frame-not-valid');
-        this.#deActivateSaveNewCropButton();
+        this.#deactivateSaveNewCropButton();
         break;
     }
   };

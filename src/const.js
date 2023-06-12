@@ -73,7 +73,8 @@ const CHANNELS = {
   CREATE_TASK: 'create-task',
   GET_TASK_LIST: 'get-task-list',
   DELETE_TASK: 'delete-task',
-  CHANGE_TASK_ACTIVITY: 'change-task-activity'
+  CHANGE_TASK_ACTIVITY: 'change-task-activity',
+  SAVE_ALL_CROPPED_IMAGES: 'save-all-cropped-images'
 };
 
 const CLASSES = {

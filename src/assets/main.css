@@ -87,6 +87,16 @@ header {
   white-space: nowrap;
 }
 
+.crop-base-name {
+  box-sizing: border-box;
+	border-radius: var(--border-radius-button);
+	border: 1px solid var(--brand_color);
+	padding: 14px 30px;
+  width: 110px;
+	font-size: 14px;
+  white-space: nowrap;
+}
+
 .button_cancel {
   box-sizing: border-box;
 	border-radius: var(--border-radius-button);
@@ -537,7 +547,7 @@ main {
   color: #666666;
 }
 
-.save-new-crop-disabled {
+.save-new-crop-disabled, .save-all-crops-disabled {
   cursor: default;
   background-color: #666666;
   border-color: #666666;

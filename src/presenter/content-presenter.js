@@ -16,7 +16,7 @@ class ContentPresenter {
   #collectionsPresenter = null;
   #photoEditorPresenter = null;
 
-  constructor({ navigationModel, tasksModel }) {
+  constructor({ navigationModel, tasksModel, photoEditorModel }) {
     this.#currentRoute = navigationModel.hash;
 
     this.#tasksPresenter = new TasksPresenter({ tasksModel });
@@ -24,7 +24,7 @@ class ContentPresenter {
     this.#dashboardPresenter = new DashboardPresenter();
     this.#converterPresenter = new ConverterPresenter();
     this.#collectionsPresenter = new CollectionsPresenter();
-    this.#photoEditorPresenter = new PhotoEditorPresenter();
+    this.#photoEditorPresenter = new PhotoEditorPresenter({ photoEditorModel });
 
     navigationModel.addObserver(this.#changeCurrentRoute);
     navigationModel.addObserver(this.init);

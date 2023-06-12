@@ -1,4 +1,5 @@
 const electron = require('electron');
+const { dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { FOLDERS, FILES, START_TASK_ID } = require('./src/const.js');
@@ -100,6 +101,34 @@ class Store {
     fs.writeFileSync(this.#taskListPath, JSON.stringify(this.#taskList));
 
     return this.#taskList;
+  };
+
+  saveAllCroppedImages = ({ cropsSrc, baseName }) => {
+    // console.log('stroe save crops', baseName);
+
+    const selectedFolder = dialog.showOpenDialogSync({ properties: ['openDirectory'] });
+    const cropsFolder = path.join(...selectedFolder, baseName);
+
+    // todo Рефакторить
+    // todo Вернуть объект с ответом
+    // todo Сделать всплывашку универсальную для сообщений
+
+    if (fs.existsSync(cropsFolder)) {
+      // Do something
+      // console.log('folder busy', baseName);
+    } else {
+      fs.mkdirSync(cropsFolder);
+      // console.log('folder created', baseName);
+
+      cropsSrc.forEach((src, i) => {
+        fs.writeFileSync(path.join(cropsFolder, `${baseName}_crop_${i + 1}.jpg`), src.split('base64,')[1], 'base64'); // todo Вынести в функцию
+      });
+
+    }
+
+    // console.log(cropsSrc);
+    // console.log(dialog.showOpenDialog({ properties: ['openDirectory'] }).then((res) => console.log(res)));
+    // console.log(dialog.showOpenDialogSync({ properties: ['openDirectory'] }));
   };
 
   #getFreeTaskId = (taskList) => {

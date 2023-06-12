@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const { DEFAULT_WINDOW_SIZE, FILES, OPTIONS, CHANNELS } = require('./src/const.js');
 const Store = require('./store.js');
 
@@ -26,8 +26,6 @@ function createWindow() {
 
   // mainWindow.setMenu(null); // Удаляем меню браузера
 
-  console.log(dialog.showOpenDialog({ properties: ['openDirectory'] }).then((res) => console.log(res)));
-
   mainWindow.webContents.openDevTools();
 
   mainWindow.loadFile('./src/app.html');
@@ -41,6 +39,7 @@ function createWindow() {
   ipcMain.on(CHANNELS.GET_TASK_LIST, (event) => event.returnValue = store.getTaskList());
   ipcMain.on(CHANNELS.DELETE_TASK, (event, taskId) => event.returnValue = store.deleteTask(taskId));
   ipcMain.on(CHANNELS.CHANGE_TASK_ACTIVITY, (event, taskId) => event.returnValue = store.changeTaskActivity(taskId));
+  ipcMain.on(CHANNELS.SAVE_ALL_CROPPED_IMAGES, (event, data) => event.returnValue = store.saveAllCroppedImages(data));
 }
 
 app.whenReady().then(createWindow);

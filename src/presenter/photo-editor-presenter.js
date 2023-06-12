@@ -10,18 +10,20 @@ const { RENDER_POSITION } = require('../const.js');
 // todo Попробовать заменить все параметры функций на объекты
 
 class PhotoEditorPresenter {
+  #photoEditorModel = null;
   #photoEditorView = null;
   #photoEditorSourcesView = null;
   #photoEditorResultView = null;
   #photoEditorEditingAreaView = null;
 
-  constructor() {
-    this.#photoEditorResultView = new PhotoEditorResultView();
+  constructor({ photoEditorModel }) {
+    this.#photoEditorModel = photoEditorModel;
+    this.#photoEditorResultView = new PhotoEditorResultView({ saveAllCrops: this.#saveAllCrops });
     this.#photoEditorSourcesView = new PhotoEditorSourcesView({ insertSourseImageToBorder: this.#insertSourseImageToBorder });
     this.#photoEditorEditingAreaView = new PhotoEditorEditingAreaView({ 
       cropFrameView: new CropFrameView({ 
         activateSaveNewCropButton: this.#activateSaveNewCropButton,
-        deActivateSaveNewCropButton: this.#deActivateSaveNewCropButton
+        deactivateSaveNewCropButton: this.#deactivateSaveNewCropButton
       }),
       clearSourceItemSelection: this.#photoEditorSourcesView.clearSourceItemSelection,
       insertNewCropToResults: this.#photoEditorResultView.insertNewCropToResults
@@ -40,12 +42,16 @@ class PhotoEditorPresenter {
     this.#photoEditorEditingAreaView.activateSaveNewCropButton();
   };
 
-  #deActivateSaveNewCropButton = () => {
-    this.#photoEditorEditingAreaView.deActivateSaveNewCropButton();
+  #deactivateSaveNewCropButton = () => {
+    this.#photoEditorEditingAreaView.deactivateSaveNewCropButton();
   };
 
   #insertSourseImageToBorder = (imageSrc) => {
     this.#photoEditorEditingAreaView.insertSourseImageToBorder(imageSrc);
+  };
+
+  #saveAllCrops = ({ crops, baseName }) => {
+    this.#photoEditorModel.saveAllCrops({ crops, baseName });
   };
 }
 
