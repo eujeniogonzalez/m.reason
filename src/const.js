@@ -62,7 +62,8 @@ const ACTIONS = {
   CHANGE_ROUTE: 'change-route',
   CREATE_TASK: 'create-task',
   DELETE_TASK: 'delete-task',
-  CHANGE_TASK_ACTIVITY: 'change-task-activity'
+  CHANGE_TASK_ACTIVITY: 'change-task-activity',
+  CHANGE_CROP_SIZE_CODE: 'change-cropsize-code'
 };
 
 const ACTIVE_ROUTE_CLASS = 'nav-item-active';
@@ -100,10 +101,17 @@ const PHOTO_LANDSCAPE = {
   VERTICAL: 'vertical'
 };
 
+// todo Вернуть размеры Ламоды
 const PHOTO_SIZE = {
   LAMODA: {
+    NAME: 'Ламода',
     WIDTH: 762,
     HEIGHT: 1100
+  },
+  OZON: {
+    NAME: 'Озон',
+    WIDTH: 1200,
+    HEIGHT: 1600
   }
 };
 

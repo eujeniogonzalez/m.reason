@@ -437,8 +437,11 @@ main {
 }
 
 .photo-editor-editing-area-buttons {
-  text-align: right;
+  display: flex;
+  justify-content: left;
+  gap: 10px;
   margin-top: 10px;
+  position: relative;
 }
 
 .photo-editor-upload-sources-label {
@@ -552,4 +555,111 @@ main {
   background-color: #666666;
   border-color: #666666;
 }
+
+.pseudo-button-size {
+	border-radius: var(--border-radius-button);
+  border: 1px solid var(--brand_color);
+	padding: 14px 30px;
+	background-color: white;
+	color: var(--brand_color);
+	cursor: pointer;
+	font-size: 14px;
+  white-space: nowrap;
+  flex-grow: 1;
+  position: relative;
+  max-width: 200px;
+}
+
+.pseudo-button-size svg {
+  position: absolute;
+  right: 25px;
+  top: calc(50% - 3px);
+}
+
+.rotate-triangle-from-closed-to-opened .button-size-triangle {
+  animation: rotateTriangleFromClosedToOpened 0.3s linear forwards;
+  transform-origin: 50% 70%;
+}
+/* todo Заменить на transition: opacity 0.5s ease; */
+@keyframes rotateTriangleFromClosedToOpened {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.rotate-triangle-from-opened-to-closed .button-size-triangle {
+  animation: rotateTriangleFromOpenedToClosed 0.3s linear forwards;
+  transform-origin: 50% 70%;
+}
+/* todo Заменить на transition: opacity 0.5s ease; */
+@keyframes rotateTriangleFromOpenedToClosed {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.crop-sizes-list {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  background-color: salmon;
+  border-radius: var(--border-radius-inner);
+  padding: 30px;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.crop-sizes-list-visible {
+  opacity: 1;
+}
+
+.crop-sizes-list-hidden {
+  opacity: 0;
+}
+
+.crop-sizes-item-label {
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.crop-sizes-item-label-dimensions {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.crop-sizes-item-radio {
+  cursor: pointer;
+}
 /* Photo editor styles (end) */
+
+/* Loader (start) */
+/* todo Заменить на константы */
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid;
+  border-color: var(--brand_color) transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Loader (end) */

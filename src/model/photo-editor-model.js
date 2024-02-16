@@ -1,28 +1,37 @@
 const { ipcRenderer } = require('electron');
 const { Observable } = require('../observable.js');
-const { CHANNELS, ACTIONS } = require('../const.js');
+const { CHANNELS, PHOTO_SIZE, ACTIONS } = require('../const.js');
 
 class PhotoEditorModel extends Observable {
+  #cropSizeCode = null;
+
   constructor() {
     super();
+
+    this.#cropSizeCode = this.#getStartCropSizeCode();
   }
 
-  saveAllCrops({ crops, baseName }) {
+  saveAllCrops = ({ crops, baseName }) => {
     let cropsSrc = [];
 
     Array.from(crops).forEach((crop) => {
       cropsSrc.push(crop.src);
     });
 
-    // console.log(baseName);
-
-    // console.log(crops[0].src.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/));
-    // console.log(crops[1].src.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/));
-
     ipcRenderer.sendSync(CHANNELS.SAVE_ALL_CROPPED_IMAGES, { cropsSrc, baseName });
-    
-    // this._notify(ACTIONS.CHANGE_ROUTE, { hash });
-  }
+  };
+
+  getCropSizeCode = () => {
+    return this.#cropSizeCode;
+  };
+
+  changeCropSizeCode = ({ newCropSizeCode }) => {
+    this.#cropSizeCode = newCropSizeCode;
+
+    this._notify(ACTIONS.CHANGE_CROP_SIZE_CODE, { updatedCropSizeCode: this.#cropSizeCode });
+  };
+
+  #getStartCropSizeCode = () => Object.keys(PHOTO_SIZE)[0];
 }
 
 module.exports = { PhotoEditorModel };

@@ -85,6 +85,10 @@ class PhotoEditorResultView {
     const newCropImage = document.createElement('img');
     newCropImage.src = sourceSrc;
 
+    // Important note! Before downscaling we should round height and width, otherwise we'll get artefacts
+    croppedWidth = Math.round(croppedWidth);
+    croppedHeight = Math.round(croppedHeight);
+
     const scale = PHOTO_SIZE.LAMODA.WIDTH / croppedWidth;
     const downScaledImage = downScaleImage(newCropImage, scale, croppedHeight, croppedWidth, croppedLeft, croppedTop).toDataURL('image/jpeg', 1); // todo Заменить на константу
     const resultImage = createElement(createPhotoEditorResultItemTemplate(downScaledImage, this.#getDruggableItemIndex()));

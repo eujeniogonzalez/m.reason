@@ -107,7 +107,7 @@ class Store {
     // console.log('stroe save crops', baseName);
 
     const selectedFolder = dialog.showOpenDialogSync({ properties: ['openDirectory'] });
-    const cropsFolder = path.join(...selectedFolder, baseName);
+    const cropsFolder = path.join(...selectedFolder, `${baseName}_cropped`); // todo Вынести cropped в константы или в другое место, подумать об этом
 
     // todo Рефакторить
     // todo Вернуть объект с ответом

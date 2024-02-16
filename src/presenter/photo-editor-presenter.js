@@ -20,7 +20,9 @@ class PhotoEditorPresenter {
     this.#photoEditorModel = photoEditorModel;
     this.#photoEditorResultView = new PhotoEditorResultView({ saveAllCrops: this.#saveAllCrops });
     this.#photoEditorSourcesView = new PhotoEditorSourcesView({ insertSourseImageToBorder: this.#insertSourseImageToBorder });
-    this.#photoEditorEditingAreaView = new PhotoEditorEditingAreaView({ 
+    this.#photoEditorEditingAreaView = new PhotoEditorEditingAreaView({
+      getCropSizeCode: this.#getCropSizeCode,
+      changeCropSizeCode: this.#changeCropSizeCode,
       cropFrameView: new CropFrameView({ 
         activateSaveNewCropButton: this.#activateSaveNewCropButton,
         deactivateSaveNewCropButton: this.#deactivateSaveNewCropButton
@@ -29,6 +31,8 @@ class PhotoEditorPresenter {
       insertNewCropToResults: this.#photoEditorResultView.insertNewCropToResults
     });
     this.#photoEditorView = new PhotoEditorView();
+
+    this.#photoEditorModel.addObserver(this.#updateCropSizesSelectorName);
   }
 
   init = () => {
@@ -52,6 +56,18 @@ class PhotoEditorPresenter {
 
   #saveAllCrops = ({ crops, baseName }) => {
     this.#photoEditorModel.saveAllCrops({ crops, baseName });
+  };
+
+  #getCropSizeCode = () => {
+    return this.#photoEditorModel.getCropSizeCode();
+  };
+
+  #changeCropSizeCode = ({ newCropSizeCode }) => {
+    this.#photoEditorModel.changeCropSizeCode({ newCropSizeCode });
+  };
+
+  #updateCropSizesSelectorName = () => {
+    
   };
 }
 
